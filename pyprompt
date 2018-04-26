@@ -71,6 +71,7 @@ def end_prompt():
 	sys.stdout.write( '\033[0m\033[K' )#s( 'reset' ) )
 	#print( '\033[0m' )#s( 'reset' ) )
 
+nonEmojiVariationSelector = u'\ufe0e'.encode( 'utf-8' )
 def begin_prompt():
 	#StatusBar = s( 'invert' ) + " " + " ┃ ".join( [
 	StatusBar = " ┃ ".join( [
@@ -79,7 +80,11 @@ def begin_prompt():
 		"⍝ " + v[ "user" ],
 		"⌂ " + v[ "cwd" ]
 	] ).decode( 'utf-8' ).center( columns, " " )
-	StatusBar = StatusBar.encode( 'utf-8' ).replace( "⌚", "📅" ).replace( "⌛", emojiclock() ).replace( "⍝", "👤" ).replace( "⌂", "📂" )
+	StatusBar = StatusBar.encode( 'utf-8' )\
+		.replace( "⌚", "📅" + nonEmojiVariationSelector )\
+		.replace( "⌛", emojiclock() + nonEmojiVariationSelector )\
+		.replace( "⍝", "👤" + nonEmojiVariationSelector )\
+		.replace( "⌂", "📂" + nonEmojiVariationSelector )
 	print StatusBar #, s( 'bold' )
 	#print len( StatusBar )
 
